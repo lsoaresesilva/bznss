@@ -1,0 +1,55 @@
+
+<ion-slides pager="true">
+<ion-header>
+  <ion-navbar>
+
+    <ion-buttons end>
+      <button ion-button (click)="next()">
+        Próximo
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+  <ion-slide>
+    <div class="intro-slide" text-center>
+      <h3 class="intro-header">Melhore a gestão administrativa da sua empresa</h3>
+      <img src="img/pdca.png" />
+      <p text-center>Administrar uma empresa não é uma tarefa fácil. Iremos lhe <strong>ajudar a realizar as ações certas</strong> para <strong>melhorar</strong> a gestão do seu negócio!</p>
+    </div>
+  </ion-slide>
+
+  <ion-slide>
+    <div class="intro-slide" text-center>
+      <h3 class="intro-header">Realize missões que irão ajudar o seu negócio</h3>
+      <ion-card>
+    
+      <ion-card-header>
+        <strong>Este é um exemplo de missão</strong>
+      </ion-card-header>
+      <ion-card-content>
+        <div text-justify> 
+          <strong>Como administrar um negócio?</strong> este é um grande desafio. <strong>Saber o que fazer</strong> é fundamental para o sucesso e muitas vezes um desafio para quem não possui conhecimento em gestão. <strong>Te ajudaremos</strong> com missões sobre diversos temas que farão você <strong>pensar administrativamente</strong> sobre o seu negócio. A cada resposta você conhecerá mais sobre o seu empreendimento e se tornará um <strong>melhor gestor!</strong> Vamos começar?!
+      </div>
+      <p text-left><strong>Qual o seu nome?</strong></p>
+      
+      <ion-row>
+        <ion-col col-lg-12>
+          <ion-item>
+          
+           <ion-label for="response" color="primary" stacked>Resposta</ion-label>
+            <ion-textarea [(ngModel)]="name" id="response" name="response"></ion-textarea>
+          </ion-item>
+
+        </ion-col>
+      </ion-row>
+      <div text-left >
+      <button ion-button (click)="goToHome()">Continuar</button>
+      </div>
+      </ion-card-content>
+      
+
+  </ion-card>
+    </div>
+  </ion-slide>
+
+</ion-slides>

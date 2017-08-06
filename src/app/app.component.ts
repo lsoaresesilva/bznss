@@ -1,10 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, LoadingController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+import { ListPage } from "../pages/list/list";
+import { MissionListPage } from "../pages/mission-list/mission-list";
+import { IntroPage } from "../pages/intro/intro";
+import { Storage } from "@ionic/storage";
 
 @Component({
   templateUrl: 'app.html'
@@ -12,18 +14,14 @@ import { ListPage } from '../pages/list/list';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = MissionListPage;
+  loader:any;
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public storage: Storage, public loadingCtrl: LoadingController, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+    this.presentLoading();
     this.initializeApp();
-
-    // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
-    ];
 
   }
 
@@ -33,7 +31,29 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.storage.get('introShown').then((result) => {
+ 
+        if(result){
+          this.rootPage = MissionListPage;
+        } else {
+          this.rootPage = IntroPage;
+          //this.storage.set('introShown', true);
+        }
+ 
+        this.loader.dismiss();
+ 
+      });
     });
+  }
+
+  presentLoading() {
+ 
+    this.loader = this.loadingCtrl.create({
+      content: "Começando..."
+    });
+ 
+    this.loader.present();
+ 
   }
 
   openPage(page) {

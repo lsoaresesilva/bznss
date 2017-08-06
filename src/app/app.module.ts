@@ -3,32 +3,49 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { MissionPage } from "../pages/mission/mission";
+import { MissionListPage } from "../pages/mission-list/mission-list";
+import { MissionService } from "./services/mission.service";
+import { SanitizeHtmlPipe } from "./pipes/sanitize-html";
+import { MissionAccomplishedService } from "./services/mission-accomplished.service";
+import { EnterpreneurService } from "./services/enterpreneur.service";
+import { IonicStorageModule } from '@ionic/storage';
+import { IntroPage } from "../pages/intro/intro";
+
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
-    ListPage
-  ],
+    ListPage,
+    MissionPage,
+    MissionListPage,
+    IntroPage,
+    SanitizeHtmlPipe
+   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
-    ListPage
+    ListPage,
+    MissionPage,
+    MissionListPage,
+    IntroPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    MissionService,
+    MissionAccomplishedService,
+    EnterpreneurService,
   ]
 })
 export class AppModule {}
