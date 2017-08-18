@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { MissionService } from "../../app/services/mission.service";
 import { Mission } from "../../app/models/mission";
 import { MissionPage } from "../mission/mission";
@@ -8,6 +8,7 @@ import { MissionAccomplishedService } from "../../app/services/mission-accomplis
 import { EnterpreneurService } from "../../app/services/enterpreneur.service";
 import { Enterpreneur } from "../../app/models/enterpreneur";
 import { Storage } from "@ionic/storage"
+import { AdMobFree, AdMobFreeBannerConfig } from "@ionic-native/admob-free";
 
 /**
  * Generated class for the MissionListPage page.
@@ -23,31 +24,51 @@ import { Storage } from "@ionic/storage"
 })
 export class MissionListPage {
   missions: Mission[];
-  enterpreneur:Enterpreneur;
+  enterpreneur: Enterpreneur;
 
-  constructor(private storage:Storage, public enterpreneurService:EnterpreneurService, public navCtrl: NavController, public navParams: NavParams, public missionService:MissionService) {
+  constructor(public toastCtrl:ToastController, public admob: AdMobFree, private storage: Storage, public enterpreneurService: EnterpreneurService, public navCtrl: NavController, public navParams: NavParams, public missionService: MissionService) {
     this.enterpreneur = new Enterpreneur();
     enterpreneurService.get().subscribe(result => {
       this.enterpreneur = result;
       this.missions = missionService.listAll();
     });
     
+
+  }
+
+  
+
+  initializeADMob() {
+    let bannerConfig: AdMobFreeBannerConfig = {
+      //isTesting: true, // Remove in production
+      autoShow: true,
+      id: 'ca-app-pub-5294529642418550/7077542659'
+    };
+
+    this.admob.banner.config(bannerConfig);
+
+    this.admob.banner.prepare().then(() => {
+      // success
+    }).catch(e => {
+      
+    });
     
   }
 
   ionViewDidLoad() {
+    this.initializeADMob();
     console.log('ionViewDidLoad MissionListPage');
   }
 
-  openMission(mission:Mission){
-    this.navCtrl.push(MissionPage, {id:mission.id})
+  openMission(mission: Mission) {
+    this.navCtrl.push(MissionPage, { id: mission.id })
   }
 
-  tempReset(){
+  tempReset() {
     this.storage.ready().then(() => {
       this.storage.clear();
     });
-    
+
   }
 
 }

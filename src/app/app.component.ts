@@ -7,6 +7,7 @@ import { ListPage } from "../pages/list/list";
 import { MissionListPage } from "../pages/mission-list/mission-list";
 import { IntroPage } from "../pages/intro/intro";
 import { Storage } from "@ionic/storage";
+import { AdMobFreeBannerConfig, AdMobFree } from "@ionic-native/admob-free";
 
 @Component({
   templateUrl: 'app.html'
@@ -22,8 +23,9 @@ export class MyApp {
   constructor(public storage: Storage, public loadingCtrl: LoadingController, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.presentLoading();
     this.initializeApp();
-
+    
   }
+
 
   initializeApp() {
     this.platform.ready().then(() => {
@@ -33,16 +35,19 @@ export class MyApp {
       this.splashScreen.hide();
       this.storage.get('introShown').then((result) => {
  
-        if(result){
+        /*if(result){
           this.rootPage = MissionListPage;
         } else {
           this.rootPage = IntroPage;
-          //this.storage.set('introShown', true);
-        }
+          this.storage.set('introShown', true);
+        }*/
+
+        this.rootPage = IntroPage;
  
         this.loader.dismiss();
  
       });
+      
     });
   }
 

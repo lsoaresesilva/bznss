@@ -16,6 +16,8 @@ import { EnterpreneurService } from "./services/enterpreneur.service";
 import { IonicStorageModule } from '@ionic/storage';
 import { IntroPage } from "../pages/intro/intro";
 
+import { AdMobFree } from '@ionic-native/admob-free';
+
 
 @NgModule({
   declarations: [
@@ -46,6 +48,7 @@ import { IntroPage } from "../pages/intro/intro";
     MissionService,
     MissionAccomplishedService,
     EnterpreneurService,
+    AdMobFree
   ]
 })
 export class AppModule {}

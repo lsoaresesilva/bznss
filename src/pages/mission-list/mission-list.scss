@@ -1,12 +1,14 @@
 page-mission-list {
-
+    ion-content {
+      background-color: #E0DFDE;
+    }
 }
 
 .missionAccomplished{
-    background-color: #00b33c;
-    color: #ffffff;
+    background-color: #9BDE72;
+    color: #111111;
 }
 
 .missionPending{
-    background-color: #F18A3E;
+    background-color: #F8C471;
 }
